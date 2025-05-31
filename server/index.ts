@@ -11,21 +11,20 @@ dotenv.config()
 const port = process.env.PORT || 3000
 const app = express()
 
-
-//corsOption
+// Replace with your frontend URL in production
 const corsOptions = {
-    origin: '*',
+    origin: 'http://localhost:3000', 
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }
-//middlewares
+
+// Middlewares
 app.use(cors(corsOptions))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(cors(corsOptions))
 
-//routes
+// Routes
 app.use('/api/services', serviceRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/users', userRoutes)   
@@ -36,3 +35,4 @@ connectDB().then(()=>{
         console.log(`Server is running on port ${port}`)
     })
 })
+
